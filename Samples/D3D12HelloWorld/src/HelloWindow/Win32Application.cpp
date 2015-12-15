@@ -29,7 +29,11 @@ int Win32Application::Run(DXSample* pSample, HINSTANCE hInstance, int nCmdShow)
 	windowClass.lpfnWndProc = WindowProc;
 	windowClass.hInstance = hInstance;
 	windowClass.hCursor = LoadCursor(NULL, IDC_ARROW);
-	windowClass.lpszClassName = L"DXSampleClass";
+	srand(__threadid());
+	wchar_t clsname[] = L"c0000";
+	for (int i = 1; i < 5; i++)
+		clsname[i] = '0' + (rand() % 10);
+	windowClass.lpszClassName = clsname;
 	RegisterClassEx(&windowClass);
 
 	RECT windowRect = { 0, 0, static_cast<LONG>(pSample->GetWidth()), static_cast<LONG>(pSample->GetHeight()) };
